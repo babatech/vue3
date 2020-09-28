@@ -20,7 +20,10 @@
       <div class="col-8">
         <h1>Status message title</h1>
         <div class="">
-          <Message v-for="message in messages" v-bind:key="message"></Message>
+          <div v-if="messages">
+            <Message v-for="message in messages" v-bind:key="message"></Message>
+          </div>
+          <div v-if="messages === null">loading...</div>
         </div>
       </div>
     </div>
@@ -28,6 +31,7 @@
 </template>
 
 <script>
+import messageService from "@/services/message.service";
 import Message from "@/components/Message.vue";
 
 export default {
@@ -37,11 +41,17 @@ export default {
   },
   data() {
     return {
-      messages: [1, 2, 3],
+      messages: [],
       categories: [1, 2],
     };
   },
-  mounted() {},
+  mounted() {
+    this.messages = null;
+    messageService.getAllMessages({}).then((res) => {
+      console.log(res);
+      this.messages = res.data;
+    });
+  },
   methods: {
     filterBy(category) {
       console.log(category);
