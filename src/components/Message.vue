@@ -23,9 +23,7 @@
 export default {
   name: "Message",
   props: ["message"],
-  mounted() {
-      console.log(this.message)
-  }
+  mounted() { }
 };
 </script>
 

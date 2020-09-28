@@ -8,7 +8,8 @@
             v-on:click="filterBy(category)"
             v-for="category in categories"
             v-bind:key="category"
-            >{{ category }}</a
+            href="#"
+            >{{ category.name }}</a
           >
         </div>
         <div class="further-options">
@@ -39,6 +40,7 @@
 
 <script>
 import messageService from "@/services/message.service";
+import categoryService from "@/services/category.service";
 import Message from "@/components/Message.vue";
 
 export default {
@@ -49,14 +51,16 @@ export default {
   data() {
     return {
       messages: [],
-      categories: [1, 2],
+      categories: [],
     };
   },
   mounted() {
     messageService.getAllMessages({}).then((res) => {
-      console.log(res);
       this.messages = res.data;
     });
+    categoryService.getAllCategories({}).then( (res) => {
+      this.categories = res.data;
+    })
   },
   methods: {
     filterBy(category) {
@@ -73,7 +77,6 @@ export default {
   text-align: left;
   a {
     display: block;
-    color: #0062cc;
   }
   .categories,
   .further-options {
