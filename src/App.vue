@@ -1,12 +1,10 @@
 <template>
   <nav class="navbar sticky-top navbar-light bg-blue">
-    <a class="navbar-brand" href="#">
-      <img
-        src="./assets/myra-logo.png"
-        height="30"
-        alt="logo"
-      />
-    </a>
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="./assets/myra-logo.png" height="30" alt="logo" />
+      </a>
+    </div>
   </nav>
   <router-view />
 </template>
@@ -19,7 +17,7 @@
   text-align: center;
   color: #2c3e50;
 }
-nav{
+nav {
   &.bg-blue {
     background-color: #082434;
   }
