@@ -2,7 +2,7 @@
   <div class="container home">
     <div class="row">
       <div class="col-4 Options">
-        <div class="categories">
+        <div class="categories mt-30">
           <b>Filter By:</b>
           <a
             v-on:click="filterBy(category)"
@@ -82,5 +82,11 @@ export default {
   .further-options {
     margin-bottom: 20px;
   }
+}
+.mt-30{
+  margin-top: 30px;
+}
+.mt-20{
+  margin-top: 20px;
 }
 </style>
