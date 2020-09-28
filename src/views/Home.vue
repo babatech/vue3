@@ -20,8 +20,15 @@
       <div class="col-8">
         <h1>Status message title</h1>
         <div class="">
-          <div v-if="messages">
-            <Message v-for="message in messages" v-bind:key="message"></Message>
+          <div>
+            <div v-if="messages.length > 0">
+              <Message
+                v-for="message in messages"
+                v-bind:key="message"
+
+                v-bind:message="message"
+              ></Message>
+            </div>
           </div>
           <div v-if="messages === null">loading...</div>
         </div>
@@ -46,7 +53,6 @@ export default {
     };
   },
   mounted() {
-    this.messages = null;
     messageService.getAllMessages({}).then((res) => {
       console.log(res);
       this.messages = res.data;
