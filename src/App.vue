@@ -10,8 +10,16 @@
 </template>
 
 <style lang="scss">
+@font-face {
+  font-family: 'Montserrat-ExtraBold';
+  src: url('./assets/font/Montserrat-ExtraBold.otf');
+}
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url('./assets/font/Montserrat-Regular.otf');
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat-Regular', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

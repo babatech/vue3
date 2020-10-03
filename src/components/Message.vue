@@ -3,17 +3,17 @@
         <div class="body text-left">
             <div>
                 <b class="">Case ID: {{message.id}}</b>
-                <span class="text-right">{{message.publishDate}}</span>
+                <span class="float-right">{{message.publishDate}}</span>
             </div>
             <div>
-                {{message.title}}
+                <h5 class="font-weight-bold">{{message.title}}</h5>
             </div>
             <div>
                 <b>Start Date: </b>
                 {{message.startDate}}
             </div>
             <div>
-                {{message.description}}
+                <p class="description">{{message.description}}</p>
             </div>
         </div>
   </div>
@@ -35,5 +35,8 @@ export default {
   .body {
     background-color: #fff;
   }
+}
+.description{
+    padding-top: 30px;
 }
 </style>
