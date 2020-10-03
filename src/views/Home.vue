@@ -8,6 +8,7 @@
             v-on:click="filterBy(category)"
             v-for="category in categories"
             v-bind:key="category"
+            v-bind:class="{ active: category.id === filter.category }"
             href="#"
             >{{ category.name }}</a
           >
@@ -26,7 +27,6 @@
               <Message
                 v-for="message in messages"
                 v-bind:key="message"
-
                 v-bind:message="message"
               ></Message>
             </div>
@@ -52,22 +52,61 @@ export default {
     return {
       messages: [],
       categories: [],
+      filter: {
+        category: null,
+      }
     };
   },
   mounted() {
-    messageService.getAllMessages({}).then((res) => {
-      this.messages = res.data;
-    });
-    categoryService.getAllCategories({}).then( (res) => {
-      this.categories = res.data;
-    })
+    this.getCategories();
+    this.getMessages();
   },
   methods: {
+    /**
+     * Event listener for category filter
+     */
     filterBy(category) {
-      console.log(category);
+      this.filter.category = this.filter.category === category.id ? null: category.id;
+      this.getMessages();
     },
+
+    /**
+     * Event listener for subscribe by RSS
+     */
     subscribeRSS() {},
+
+    /**
+     * Event listener for subscribe by E-mail
+     */
     subscribeEmail() {},
+    buildPayload() {
+      const payload = {};
+      if (this.filter.category) {
+        payload.category = this.filter.category;
+      }
+
+      return payload;
+    },
+
+    /**
+     * Get Categories list from server
+     */
+    getCategories() {
+      categoryService.getAllCategories({}).then((res) => {
+        this.categories = res.data;
+      });
+    },
+
+    /**
+     * get Message list form server
+     */
+    getMessages() {
+      const payload = this.buildPayload();
+
+      messageService.getAllMessages(payload).then((res) => {
+        this.messages = res.data;
+      });
+    },
   },
 };
 </script>
@@ -82,11 +121,16 @@ export default {
   .further-options {
     margin-bottom: 20px;
   }
+  .categories{
+    a.active{
+      color: black;
+    }
+  }
 }
-.mt-30{
+.mt-30 {
   margin-top: 30px;
 }
-.mt-20{
+.mt-20 {
   margin-top: 20px;
 }
 </style>
