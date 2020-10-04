@@ -43,6 +43,8 @@
           <label>Timestamp</label>
         </div>
         <div class="col-9">
+          <!-- no vue3 compatible date-time picker package found yet -->
+          <!--<Calendar id="date" v-model="messageUpdate.date" :showTime="true" /> -->
           <input
             type="datetime"
             class="form-control"
@@ -188,7 +190,7 @@ export default {
       },
       messageUpdate: {
         status: "",
-        date: "",
+        date: null,
         description: "",
       },
     };

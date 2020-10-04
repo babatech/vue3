@@ -86,5 +86,8 @@ export default {
 .description {
   padding-top: 30px;
 }
+.card-title{
+  cursor: pointer;
+}
 
 </style>
