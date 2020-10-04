@@ -1,5 +1,7 @@
 # vue3
 
+This project need mock server. See detail about mock server in folder json-server
+
 ## Project setup
 ```
 npm install

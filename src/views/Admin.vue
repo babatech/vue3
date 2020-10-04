@@ -29,12 +29,12 @@
       <div class="title">
         <h5>Add an update</h5>
       </div>
-      <div class="row ">
+      <div class="row">
         <div class="col-3">
           <label>Status</label>
         </div>
         <div class="col-9">
-          <select class="form-control"  v-model="messageUpdate.status" >
+          <select class="form-control" v-model="messageUpdate.status">
             <option value="DRAFT">Draft</option>
             <option value="PUBLISHED">Published</option>
           </select>
@@ -43,17 +43,26 @@
           <label>Timestamp</label>
         </div>
         <div class="col-9">
-          <input type="datetime" class="form-control"  v-model="messageUpdate.date" />
+          <input
+            type="datetime"
+            class="form-control"
+            v-model="messageUpdate.date"
+          />
         </div>
         <div class="col-3">
           <label>Text</label>
         </div>
         <div class="col-9">
-          <textarea class="form-control"  v-model="messageUpdate.description"></textarea>
+          <textarea
+            class="form-control"
+            v-model="messageUpdate.description"
+          ></textarea>
         </div>
       </div>
       <div class="text-right">
-        <a class="btn-custom btn-cancel" v-on:click="addUpdateTo=null">Cancel</a>
+        <a class="btn-custom btn-cancel" v-on:click="addUpdateTo = null"
+          >Cancel</a
+        >
         <a class="btn-custom" v-on:click="onAddUpdate()">Submit</a>
       </div>
     </div>
@@ -62,22 +71,28 @@
   <div class="model-box model-edit" v-show="editMessage">
     <div class="model-body text-left">
       <div class="title">
-        <h5>{{editMessage !==true ? 'Edit' : 'Add a new'}} entry</h5>
+        <h5>{{ editMessage !== true ? "Edit" : "Add a new" }} entry</h5>
       </div>
-      <div class="row ">
+      <div class="row">
         <div class="col-3">
           <label>Category</label>
         </div>
         <div class="col-9">
-          <select class="form-control"  v-model="message.category" >
-            <option v-for="category in categories" v-bind:key="category" v-bind:value="category.id">{{category.name}}</option>
+          <select class="form-control" v-model="message.category">
+            <option
+              v-for="category in categories"
+              v-bind:key="category"
+              v-bind:value="category.id"
+            >
+              {{ category.name }}
+            </option>
           </select>
         </div>
         <div class="col-3">
           <label>Status</label>
         </div>
         <div class="col-9">
-          <select class="form-control"  v-model="message.status" >
+          <select class="form-control" v-model="message.status">
             <option value="DRAFT">Draft</option>
             <option value="PUBLISHED">Published</option>
           </select>
@@ -86,25 +101,34 @@
           <label>Publish date:</label>
         </div>
         <div class="col-9">
-          <input type="text" class="form-control"  v-model="message.publishDate"  />
+          <input
+            type="text"
+            class="form-control"
+            v-model="message.publishDate"
+          />
         </div>
         <div class="col-3">
           <label>Title:</label>
         </div>
         <div class="col-9">
-          <input type="text" class="form-control" placeholder="title text" v-model="message.title" />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="title text"
+            v-model="message.title"
+          />
         </div>
         <div class="col-3">
           <label>Start:</label>
         </div>
         <div class="col-9">
-          <input type="text" class="form-control"  v-model="message.startDate"/>
+          <input type="text" class="form-control" v-model="message.startDate" />
         </div>
         <div class="col-3">
           <label>End:</label>
         </div>
         <div class="col-9">
-          <input type="text" class="form-control"  v-model="message.endDate"/>
+          <input type="text" class="form-control" v-model="message.endDate" />
         </div>
         <div class="col-3">
           <label>Template:</label>
@@ -119,12 +143,17 @@
           <label>Text</label>
         </div>
         <div class="col-9">
-          <textarea  class="form-control" v-model="message.description"></textarea>
+          <textarea
+            class="form-control"
+            v-model="message.description"
+          ></textarea>
         </div>
       </div>
       <div class="text-right">
-        <a class="btn-custom btn-cancel" v-on:click="editMessage=null">Cancel</a>
-        <a class="btn-custom" >Submit</a>
+        <a class="btn-custom btn-cancel" v-on:click="editMessage = null"
+          >Cancel</a
+        >
+        <a class="btn-custom" v-on:click="onAddEntry()">Submit</a>
       </div>
     </div>
   </div>
@@ -155,19 +184,18 @@ export default {
         description: "",
         status: null,
         category: null,
-        update: []
+        update: [],
       },
       messageUpdate: {
-        status: '',
-        date: '',
-        description: ''
-      }
-    }
+        status: "",
+        date: "",
+        description: "",
+      },
+    };
   },
-  mounted(){
+  mounted() {
     this.getCategories();
     this.getMessages();
-
   },
   methods: {
     /**
@@ -190,37 +218,65 @@ export default {
 
     addUpdate(message) {
       this.addUpdateTo = message;
-      console.log(message)
+      console.log(message);
     },
     addEntry() {
-      this.editMessage = true
+      this.editMessage = true;
     },
-    editEntry(message){
+    editEntry(message) {
       this.message = message;
       this.editMessage = message;
     },
     onAddUpdate() {
       if (this.addUpdateTo) {
-        this.addUpdateTo.updates.push(this.messageUpdate)
-        messageService.updateMessage(this.addUpdateTo.id,this.addUpdateTo).then(res =>{
-          console.log(res);
-          this.messageUpdate.status = ''
-          this.messageUpdate.description = ''
-          this.messageUpdate.date = ''
-          this.getMessages()
-          this.addUpdateTo = null;
-        })
+        this.addUpdateTo.updates.push(this.messageUpdate);
+        messageService
+          .updateMessage(this.addUpdateTo.id, this.addUpdateTo)
+          .then((res) => {
+            console.log(res);
+            this.messageUpdate.status = "";
+            this.messageUpdate.description = "";
+            this.messageUpdate.date = "";
+            this.getMessages();
+            this.addUpdateTo = null;
+          });
       }
-    }
-  }
-}
+    },
+    onAddEntry() {
+      if (this.editMessage === true) {
+        messageService.addMessage(this.message).then(() => {
+          this.resetMessage();
+        });
+      } else {
+        messageService
+          .updateMessage(this.message.id, this.message)
+          .then(() => {
+            this.resetMessage();
+          });
+      }
+    },
+    resetMessage() {
+      this.message = {
+        startDate: null,
+        endDate: null,
+        publishDate: null,
+        expectedEndDate: null,
+        title: "",
+        description: "",
+        status: null,
+        category: null,
+        update: [],
+      };
+      this.editMessage = null;
+    },
+  },
+};
 </script>
 
 <style lang="scss">
-
 .model-box {
   position: fixed;
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0, 0, 0, 0.5);
   top: 0;
   right: 0;
   bottom: 0;
@@ -237,10 +293,10 @@ export default {
     max-height: 80vh;
     overflow: auto;
   }
-  label{
+  label {
     margin: 15px 0;
   }
-  .title{
+  .title {
     margin-bottom: 20px;
   }
 }
