@@ -16,6 +16,16 @@
         <p class="description">{{ message.description }}</p>
       </div>
       <div v-if="admin">
+        <h6>Updates: </h6>
+        <p class="update" v-for="update in message.updates" v-bind:key="update">
+          <b>Date: </b> {{ update.date }}<br>
+          <b>Status: </b> {{ update.status }}<br>
+          <b>update Description: </b><br>
+          {{ update.description }}
+        </p>
+        <p v-show="message.updates.length === 0">No updates yet</p>
+      </div>
+      <div v-if="admin">
         <div class="text-right">
           <a class="btn-custom" v-on:click="editMessage(message)">Edit</a>
           <a class="btn-custom btn-delete" v-on:click="deleteMessage(message)"
