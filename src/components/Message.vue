@@ -1,11 +1,11 @@
 <template>
   <div class="card message">
-    <div class="card-body body text-left">
+    <div class="card-body body text-left" >
       <div>
         <b class="">Case ID: {{ message.id }}</b>
         <span class="float-right">{{ message.publishDate }}</span>
       </div>
-      <div class="card-title">
+      <div class="card-title" v-on:click="goToDetail(message.id)">
         <h5 class="font-weight-bold">{{ message.title }}</h5>
       </div>
       <div>
@@ -57,6 +57,9 @@ export default {
     addUpdate(message) {
       this.$emit("add-update", message);
     },
+    goToDetail(id){
+      this.$router.push('/entry/'+id) 
+    }
   },
 };
 </script>

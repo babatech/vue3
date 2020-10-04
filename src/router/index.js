@@ -10,6 +10,11 @@ const routes = [
     path: '/admin',
     name: 'Admin panel',
     component: () => import('../views/Admin.vue')
+  },
+  {
+    path: '/entry/:entry_id',
+    name: 'Entry detail',
+    component: () => import('../views/Entry.vue')
   }
 ]
 
