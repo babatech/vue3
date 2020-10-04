@@ -17,11 +17,15 @@
       </div>
       <div v-if="admin">
         <div class="text-right">
-          <a class="btn-custom">Edit</a>
-          <a class="btn-custom btn-delete">Delete</a>
+          <a class="btn-custom" v-on:click="editMessage(message)">Edit</a>
+          <a class="btn-custom btn-delete" v-on:click="deleteMessage(message)"
+            >Delete</a
+          >
         </div>
         <div class="text-right">
-          <a class="btn-custom">Add an update</a>
+          <a class="btn-custom" v-on:click="addUpdate(message)"
+            >Add an update</a
+          >
         </div>
       </div>
     </div>
@@ -29,10 +33,29 @@
 </template>
 
 <script>
+import messageService from "@/services/message.service";
 export default {
   name: "Message",
   props: ["message", "admin"],
+  data() {},
   mounted() {},
+  methods: {
+    editMessage(message) {
+      this.$emit("edit-message", message);
+    },
+    deleteMessage(message) {
+      const conf = confirm("Are you sure to delete the message?");
+      if (conf) {
+        messageService.deleteMessage(message.id).then((res) => {
+          console.log(res);
+          this.$emit("reload-messages", message);
+        });
+      }
+    },
+    addUpdate(message) {
+      this.$emit("add-update", message);
+    },
+  },
 };
 </script>
 
@@ -48,20 +71,5 @@ export default {
 .description {
   padding-top: 30px;
 }
-.btn-custom {
-  font-family: 'Montserrat-SemiBold';
-  display: inline-block;
-  padding: 15px;
-  border: 1px solid #007bff;
-  color: #007bff;
-  font-size: 1.3em;
-  margin: 10px;
-  min-width: 150px;
-  text-align: center;
-  &.btn-delete {
-    border: 1px solid #ff0033;
-    color: #fff;
-    background-color: #ff0033;
-  }
-}
+
 </style>
