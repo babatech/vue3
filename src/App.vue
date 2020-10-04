@@ -6,7 +6,9 @@
       </a>
     </div>
   </nav>
-  <router-view />
+  <div class="container">
+    <router-view />
+  </div>
 </template>
 
 <style lang="scss">
@@ -17,6 +19,10 @@
 @font-face {
   font-family: 'Montserrat-Regular';
   src: url('./assets/font/Montserrat-Regular.otf');
+}
+@font-face {
+  font-family: 'Montserrat-SemiBold';
+  src: url('./assets/font/Montserrat-SemiBold.otf');
 }
 #app {
   font-family: 'Montserrat-Regular', Helvetica, Arial, sans-serif;

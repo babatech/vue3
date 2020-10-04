@@ -1,5 +1,5 @@
 <template>
-  <div class="container home">
+  <div class="home">
     <div class="row">
       <div class="col-4 Options">
         <div class="categories mt-30">
