@@ -37,7 +37,9 @@ import messageService from "@/services/message.service";
 export default {
   name: "Message",
   props: ["message", "admin"],
-  data() {},
+  data() {
+    return {}
+  },
   mounted() {},
   methods: {
     editMessage(message) {
